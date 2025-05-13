@@ -1,0 +1,6 @@
+@swagerVersionning_HostAddress = http://localhost:5185
+
+GET {{swagerVersionning_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
