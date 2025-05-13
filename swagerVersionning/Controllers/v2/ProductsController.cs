@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyApi.Controllers.v2
+namespace swagerVersionning.Controllers.v2
 {
     [ApiController]
     [ApiVersion("2.0")]
