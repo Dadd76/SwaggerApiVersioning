@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace swagerVersionning.Controllers.v1
 {
     [ApiController]
-    [ApiVersion("1.0")]
+    [ApiVersion("1.0",Deprecated = true)]
     [Route("api/v{version:apiVersion}/products")]
     public class ProductsController : ControllerBase
     {
@@ -18,6 +18,8 @@ namespace swagerVersionning.Controllers.v1
         [HttpGet]
         public IActionResult Get()
         {
+            HttpContext.Response.Headers.Append("Deprecation", "true");
+            HttpContext.Response.Headers.Append("Link", "</api/v2/products>; rel=\"successor-version\"");
             return Ok("Liste des produits - V1");
         }
     }

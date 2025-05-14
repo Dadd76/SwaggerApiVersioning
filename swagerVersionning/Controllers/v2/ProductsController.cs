@@ -14,7 +14,7 @@ namespace swagerVersionning.Controllers.v2
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("Liste des produits - V1");
+            return Ok("Liste des produits - V2");
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("swagerVersionning")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e3cf0a15b7a1d52ac0bf007cb02e866e91d3001")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85fd69a49dfccaa5e5d932b957e0f3f2d0ef5943")]
 [assembly: System.Reflection.AssemblyProductAttribute("swagerVersionning")]
 [assembly: System.Reflection.AssemblyTitleAttribute("swagerVersionning")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

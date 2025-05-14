@@ -43,13 +43,16 @@ builder.Services.AddSwaggerGen(options =>
         Console.WriteLine($"❌ Fichier XML de documentation introuvable : {xmlPath}");
     }
 
-     options.DocInclusionPredicate((version, desc) =>
+    options.DocInclusionPredicate((version, desc) =>
     {
-        var versions = desc.CustomAttributes()
-                           .OfType<ApiVersionAttribute>()
-                           .SelectMany(attr => attr.Versions);
+        var versions = desc.ActionDescriptor.EndpointMetadata
+                            .OfType<ApiVersionAttribute>()
+                            .SelectMany(attr => attr.Versions);
 
-        return versions.Any(v => $"v{v}" == version);
+        var cleanVersion = version.Replace("v", "");
+
+        // 🔄 Comparaison souple entre "1" et "1.0"
+        return versions.Any(v => v.ToString() == cleanVersion || v.ToString() == $"{cleanVersion}.0");
     });
 });
 
@@ -60,9 +63,9 @@ var app = builder.Build();
 var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 app.UseSwagger();
 app.UseSwaggerUI(options =>
-{  
+{
     options.DocumentTitle = "Documentation API - Versioning Example";
-    
+
     foreach (var desc in provider.ApiVersionDescriptions)
     {
         options.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json", $"API {desc.GroupName.ToUpperInvariant()}");
@@ -81,7 +84,16 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
         foreach (var desc in _provider.ApiVersionDescriptions)
         {
-            options.SwaggerDoc(desc.GroupName, new OpenApiInfo() { Title = $"My API {desc.ApiVersion}", Version = desc.ApiVersion.ToString() });
+            var info = new OpenApiInfo()
+            {
+                Title = $"My API {desc.ApiVersion}",
+                Version = desc.ApiVersion.ToString(),
+                Description = desc.IsDeprecated 
+                    ? "⚠️ Cette version de l'API est obsolète. Merci de migrer vers une version plus récente." 
+                    : "Version stable."
+            };
+
+            options.SwaggerDoc(desc.GroupName, info);  
         }
     }
 }
