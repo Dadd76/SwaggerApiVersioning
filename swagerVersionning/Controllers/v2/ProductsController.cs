@@ -7,7 +7,14 @@ namespace swagerVersionning.Controllers.v2
     [Route("api/v{version:apiVersion}/products")]
     public class ProductsController : ControllerBase
     {
+        /// <summary>
+        /// Récupère la liste des produits disponibles.
+        /// </summary>
+        /// <returns>Retourne la liste des produits sous forme de texte.</returns>
         [HttpGet]
-        public IActionResult Get() => Ok("Liste des produits - V2 avec nouveaux champs !");
+        public IActionResult Get()
+        {
+            return Ok("Liste des produits - V1");
+        }
     }
 }
