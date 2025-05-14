@@ -1,14 +1,20 @@
 # SwaggerApiVersioning
 intégration de Swashbuckle dans un projet ASP.NET Core Web API, avec versioning et documentation enrichie
 
+Swashbuckle permet de :
 
-🔧 Étape 1 : Installation du package
+- Générer une interface interactive (Swagger UI) pour tester vos endpoints REST.
+- Documenter automatiquement vos API à partir de vos attributs, routes et types.
+- Gérer la versioning, la sécurité (JWT, OAuth), et d'autres options via configuration.
+- Exporter une spécification OpenAPI (fichier JSON/YAML) pour l'utiliser avec d'autres outils (Postman, API Gateway...).
+
+# 🔧 Étape 1 : Installation du package
 Dans le terminal à la racine du projet :
 
 dotnet add package Swashbuckle.AspNetCore
 dotnet add package Microsoft.AspNetCore.Mvc.Versioning
 
-🧱 Étape 2 : Configuration dans Program.cs (ou Startup.cs selon la version)
+# 🧱 Étape 2 : Configuration dans Program.cs (ou Startup.cs selon la version)
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,7 +57,7 @@ app.UseSwaggerUI(c =>
 app.MapControllers();
 app.Run();
 
-📁 Étape 3 : Activer la génération des commentaires XML
+# 📁 Étape 3 : Activer la génération des commentaires XML
 Dans le fichier .csproj :
 
 <PropertyGroup>
@@ -59,7 +65,7 @@ Dans le fichier .csproj :
   <NoWarn>1591</NoWarn>
 </PropertyGroup>
 
-✅ Étape 4 : Exemple de contrôleur versionné
+# Étape 4 : Exemple de contrôleur versionné
 namespace MyApi.Controllers.v1;
 
 [ApiController]
@@ -89,3 +95,15 @@ La documentation est enrichie avec vos commentaires XML.
 http://127.0.0.1:5185/api/v1/products
 
 http://127.0.0.1:5185/api/v2/products
+
+http://127.0.0.1:5185/swagger/index.html
+
+
+✅ 1️⃣ Regénérer le certificat développeur
+Dans le terminal (PowerShell, CMD, ou Bash), exécute la commande suivante :
+
+bash
+Copier
+Modifier
+dotnet dev-certs https --clean
+dotnet dev-certs https --trust
