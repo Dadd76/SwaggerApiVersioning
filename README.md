@@ -99,11 +99,7 @@ http://127.0.0.1:5185/api/v2/products
 http://127.0.0.1:5185/swagger/index.html
 
 
-✅ 1️⃣ Regénérer le certificat développeur
+# Regénérer le certificat développeur
 Dans le terminal (PowerShell, CMD, ou Bash), exécute la commande suivante :
-
-bash
-Copier
-Modifier
 dotnet dev-certs https --clean
 dotnet dev-certs https --trust
